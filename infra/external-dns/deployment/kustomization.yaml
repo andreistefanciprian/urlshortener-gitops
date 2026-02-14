@@ -3,4 +3,5 @@ kind: Kustomization
 namespace: external-dns
 resources:
 - namespace.yaml
-- helmrelease.yaml
+- helmrelease-aws.yaml
+- helmrelease-cloudflare.yaml
