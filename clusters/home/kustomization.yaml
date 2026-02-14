@@ -11,6 +11,10 @@ resources:
   - secrets-store-csi-driver.yaml
   - cert-manager.yaml
   - monitoring.yaml
+  - external-dns.yaml
+
+  # Ingress
+  - traefik.yaml
 
   # Security & Policy
   - priorityclasses.yaml
