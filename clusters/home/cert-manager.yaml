@@ -4,7 +4,7 @@ metadata:
   name: cert-manager
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 10m0s
   path: ./infra/cert-manager
   prune: true
   sourceRef:
@@ -19,7 +19,7 @@ metadata:
   name: cert-manager-cas-issuer
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 10m0s
   path: ./infra/cert-manager/cas-issuer
   prune: true
   postBuild:
@@ -38,7 +38,7 @@ metadata:
   name: cert-manager-cas-issuer-config
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 10m0s
   path: ./infra/cert-manager/cas-issuer-config
   prune: true
   postBuild:

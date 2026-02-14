@@ -6,7 +6,7 @@ metadata:
 spec:
   dependsOn:
     - name: secrets-store-csi-driver
-  interval: 1m0s
+  interval: 10m0s
   path: ./infra/monitoring/kube-state-metrics
   prune: true
   sourceRef:
@@ -25,7 +25,7 @@ metadata:
 spec:
   dependsOn:
     - name: monitoring
-  interval: 1h
+  interval: 10m0s
   retryInterval: 2m
   timeout: 5m
   prune: true
