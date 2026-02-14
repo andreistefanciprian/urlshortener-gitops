@@ -1,0 +1,8 @@
+apiVersion: cas-issuer.jetstack.io/v1beta1
+kind: GoogleCASClusterIssuer
+metadata:
+  name: googlecasclusterissuer
+spec:
+  project: "${GCP_PROJECT}"
+  location: "${GCP_REGION}"
+  caPoolId: "${GCP_CERT_POOL_ID}"

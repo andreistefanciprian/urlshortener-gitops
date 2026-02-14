@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-vars
+  namespace: flux-system
+data:
+  GCP_PROJECT: dependable-yen-480702-b5
+  CLUSTER_DOMAIN: netl1.com
+  GCP_REGION: australia-southeast1
+  GCP_CERT_POOL_ID: home-ca-pool

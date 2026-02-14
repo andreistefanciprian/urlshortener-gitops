@@ -1,0 +1,36 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: external-dns
+spec:
+  interval: 5m0s
+  releaseName: external-dns
+  chart:
+    spec:
+      chart: external-dns
+      version: 1.15.2
+      sourceRef:
+        kind: HelmRepository
+        name: external-dns-charts
+        namespace: flux-system
+  values:
+    provider:
+      name: aws
+    env:
+      - name: AWS_ACCESS_KEY_ID
+        valueFrom:
+          secretKeyRef:
+            name: external-dns-aws
+            key: access-key-id
+      - name: AWS_SECRET_ACCESS_KEY
+        valueFrom:
+          secretKeyRef:
+            name: external-dns-aws
+            key: secret-access-key
+      - name: AWS_DEFAULT_REGION
+        value: ap-southeast-2
+    domainFilters:
+      - netl1.com
+    policy: upsert-only
+    sources:
+      - ingress
