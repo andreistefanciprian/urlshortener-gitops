@@ -5,6 +5,7 @@ metadata:
   namespace: flux-system
 data:
   GCP_PROJECT: dependable-yen-480702-b5
-  CLUSTER_DOMAIN: netl1.com
+  AWS_DOMAIN: netl1.com
+  CLOUDFLARE_DOMAIN: 9tzy.xyz
   GCP_REGION: australia-southeast1
   GCP_CERT_POOL_ID: home-ca-pool

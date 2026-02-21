@@ -31,7 +31,7 @@ spec:
       - name: AWS_DEFAULT_REGION
         value: ap-southeast-2
     domainFilters:
-      - netl1.com
+      - ${AWS_DOMAIN}
     policy: upsert-only
     sources:
       - ingress
