@@ -43,19 +43,19 @@ Update the `GCP_PROJECT` variable in:
 
 > **Note:** Variables in the ConfigMap are propagated across all manifests in the `./infra` folder.
 
-#### 3. Deploy Flux Operator
+#### 3. Deploy Flux Operator and Instance
 
 ```bash
+# Authenticate to GHCR to be able to pull flux operator images
+helm registry login ghcr.io --username <your-github-username> --password <github-PAT>
+
 # Preview changes
 helmfile -f clusters/home/flux-system/helmfile.yaml diff -l name=flux-operator
 
 # Deploy operator
 helmfile -f clusters/home/flux-system/helmfile.yaml apply -l name=flux-operator
-```
 
-#### 4. Deploy Flux Instance
-
-```bash
+# Deploy instance
 # Preview changes
 helmfile -f clusters/home/flux-system/helmfile.yaml diff -l name=flux-instance
 
