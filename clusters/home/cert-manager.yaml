@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./infra/cert-manager
+  path: ./infra/cert-manager/core
   prune: true
   sourceRef:
     kind: GitRepository
