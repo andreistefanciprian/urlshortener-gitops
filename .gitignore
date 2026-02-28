@@ -1,1 +1,4 @@
 *.pem
+terraform
+test
+*/.debug.md
