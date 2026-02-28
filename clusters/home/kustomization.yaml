@@ -9,6 +9,7 @@ resources:
   # Core Infrastructure
   - gateway-api-crds.yaml
   - secrets-store-csi-driver.yaml
+  - external-secrets.yaml
   - cert-manager.yaml
   - monitoring.yaml
   - external-dns.yaml
