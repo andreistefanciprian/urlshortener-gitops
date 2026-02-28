@@ -21,4 +21,4 @@ spec:
   values:
     serviceAccount:
       annotations:
-        iam.gke.io/gcp-service-account: "external-secrets@${GCP_PROJECT}.iam.gserviceaccount.com"
+        iam.gke.io/gcp-service-account: "${CLUSTER_NAME}-external-secrets@${GCP_PROJECT}.iam.gserviceaccount.com"
