@@ -9,6 +9,7 @@ This repository contains Kubernetes manifests managed by [FluxCD](https://fluxcd
 - **[Cert-Manager](https://cert-manager.io/docs/installation/helm/)** - Automatic TLS certificate management
 - **[Gateway API](https://gateway-api.sigs.k8s.io/)** - Kubernetes Gateway API CRDs
 - **[Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/introduction)** - Secret management integration
+- **[External Secrets Operator](https://external-secrets.io/)** - Syncs secrets from GCP Secret Manager into Kubernetes
 - **[External DNS](https://kubernetes-sigs.github.io/external-dns/)** - Automatic DNS record management
 - **[Priority Classes](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/)** - Pod scheduling priority configuration
 
@@ -43,7 +44,13 @@ Update the `GCP_PROJECT` variable in:
 
 > **Note:** Variables in the ConfigMap are propagated across all manifests in the `./infra` folder.
 
-#### 3. Deploy Flux Operator and Instance
+#### 3. Upload Secrets to GCP Secret Manager
+
+The Kubernetes secret `cloudflare-api-token` (used by External DNS and cert-manager for Cloudflare DNS01 challenges) is **not stored in Git**. It is created automatically in both the `external-dns` and `cert-manager` namespaces by [External Secrets Operator](https://external-secrets.io/), which pulls the value from GCP Secret Manager.
+
+You must manually upload the Cloudflare API token to GCP Secret Manager before deploying.
+
+#### 4. Deploy Flux Operator and Instance
 
 ```bash
 # Authenticate to GHCR to be able to pull flux operator images
@@ -64,6 +71,7 @@ helmfile -f clusters/home/flux-system/helmfile.yaml apply -l name=flux-instance
 ```
 
 #### 5. Access Flux Operator UI
+
 
 ```bash
 # Forward port to access the operator UI
