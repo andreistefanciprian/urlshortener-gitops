@@ -2,3 +2,21 @@ serviceMonitor:
   create: false
   interval: 60s
   scrapeTimeout: 30s
+web:
+  # -- Enable the [Flux Status web server](https://fluxoperator.dev/web-ui/) on port 9080.
+  enabled: true
+  # -- Ingress settings for the Flux Status web interface.
+  ingress: # @schema default: {"enabled":false,"className":"","annotations":{}}
+    enabled: true # @schema default: false
+    className: "traefik"
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    hosts: # @schema item: object ; uniqueItems: true
+      - host: flux-operator.9tzy.xyz
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls: # @schema item: object ; uniqueItems: true
+      - secretName: flux-operator-tls
+        hosts:
+          - flux-operator.9tzy.xyz
