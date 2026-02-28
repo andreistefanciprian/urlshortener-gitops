@@ -10,5 +10,5 @@ data:
   ACME_EMAIL: andreistefanciprian@gmail.com
   GCP_REGION: australia-southeast1
   CLUSTER_NAME: home
-  GCP_CERT_POOL_ID: ${CLUSTER_NAME}-ca-pool
+  GCP_CERT_POOL_ID: home-ca-pool
 
