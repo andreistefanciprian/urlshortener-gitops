@@ -12,6 +12,8 @@ This repository contains Kubernetes manifests managed by [FluxCD](https://fluxcd
 - **[External Secrets Operator](https://external-secrets.io/)** - Syncs secrets from GCP Secret Manager into Kubernetes
 - **[External DNS](https://kubernetes-sigs.github.io/external-dns/)** - Automatic DNS record management
 - **[Priority Classes](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/)** - Pod scheduling priority configuration
+- **[Redis](https://github.com/bitnami/charts/tree/main/bitnami/redis)** - In-memory data store (standalone, auth via GCP Secret Manager)
+- **[PostgreSQL](https://github.com/bitnami/charts/tree/main/bitnami/postgresql)** - Relational database for the URL shortener (`urls` DB, `short_links` table, auth via GCP Secret Manager)
 
 ## Initial Setup
 
@@ -46,9 +48,29 @@ Update the `GCP_PROJECT` variable in:
 
 #### 3. Upload Secrets to GCP Secret Manager
 
-The Kubernetes secret `cloudflare-api-token` (used by External DNS and cert-manager for Cloudflare DNS01 challenges) is **not stored in Git**. It is created automatically in both the `external-dns` and `cert-manager` namespaces by [External Secrets Operator](https://external-secrets.io/), which pulls the value from GCP Secret Manager.
+The following secrets are **not stored in Git**. They are created automatically by [External Secrets Operator](https://external-secrets.io/), which pulls values from GCP Secret Manager:
 
-You must manually upload the Cloudflare API token to GCP Secret Manager before deploying.
+| Secret | Namespace | GCP Secret Manager key(s) |
+|--------|-----------|---------------------------|
+| `cloudflare-api-token` | `external-dns`, `cert-manager` | `${CLUSTER_NAME}-cloudflare-api-token` |
+| `redis-password` | `redis` | `${CLUSTER_NAME}-redis-password` |
+| `pg-creds` | `postgres` | `${CLUSTER_NAME}-db-admin-password`, `${CLUSTER_NAME}-db-user-password`, `${CLUSTER_NAME}-db-replication-password` |
+
+You must manually create and upload all secrets to GCP Secret Manager before deploying:
+
+```bash
+PROJECT_NAME="home"
+
+# Create and populate random passwords for Redis and PostgreSQL
+for secret in redis-password db-admin-password db-user-password db-replication-password; do
+  echo -n "$(openssl rand -base64 32)" | gcloud secrets versions add ${PROJECT_NAME}-${secret} --data-file=-
+done
+
+# Create Cloudflare API token secret (replace with your actual token)
+echo -n "<your-cloudflare-api-token>" | gcloud secrets versions add ${PROJECT_NAME}-cloudflare-api-token --data-file=-
+```
+
+> **Note:** The secrets must already exist in GCP Secret Manager before running `gcloud secrets versions add`.
 
 #### 4. Deploy Flux Operator and Instance
 
