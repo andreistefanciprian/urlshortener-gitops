@@ -18,6 +18,7 @@ resources:
   - external-dns.yaml
 
   # Applications
+  - postgres.yaml
   - redis.yaml
 
   # Ingress
