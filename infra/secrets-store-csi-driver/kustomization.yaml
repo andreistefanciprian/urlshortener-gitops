@@ -3,6 +3,5 @@ kind: Kustomization
 resources:
   - helmrepository.yaml
   - gitrepository.yaml
-  - namespace.yaml
   - helmrelease-csi-driver.yaml
   - helmrelease-gcp-plugin.yaml

@@ -4,3 +4,4 @@ resources:
   - clustersecretstore.yaml
   - externalsecret-cert-manager.yaml
   - externalsecret-external-dns.yaml
+  - externalsecret-redis.yaml
