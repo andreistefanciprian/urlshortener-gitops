@@ -66,7 +66,7 @@ for secret in redis-password db-admin-password db-user-password db-replication-p
   echo -n "$(openssl rand -base64 32)" | gcloud secrets versions add ${PROJECT_NAME}-${secret} --data-file=-
 done
 
-# Create Cloudflare API token secret (replace with your actual token)
+# Create Cloudflare API token secret with DNS Edit permission
 echo -n "<your-cloudflare-api-token>" | gcloud secrets versions add ${PROJECT_NAME}-cloudflare-api-token --data-file=-
 ```
 
