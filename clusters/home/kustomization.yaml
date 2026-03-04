@@ -6,6 +6,9 @@ resources:
   # Flux System (Operator and Instance)
   - flux-system
 
+  # Namespaces (must come first)
+  - namespaces.yaml
+
   # Core Infrastructure
   - gateway-api-crds.yaml
   # - secrets-store-csi-driver.yaml
@@ -13,6 +16,9 @@ resources:
   - cert-manager.yaml
   - monitoring.yaml
   - external-dns.yaml
+
+  # Applications
+  - redis.yaml
 
   # Ingress
   - traefik.yaml
