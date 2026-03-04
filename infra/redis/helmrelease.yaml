@@ -8,7 +8,7 @@ spec:
   releaseName: redis
   chart:
     spec:
-      chart: bitnami/redis
+      chart: redis
       version: "24.1.3"
       sourceRef:
         kind: HelmRepository
