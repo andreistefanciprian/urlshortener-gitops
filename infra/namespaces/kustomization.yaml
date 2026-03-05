@@ -11,3 +11,4 @@ resources:
   - traefik.yaml
   - url-gen.yaml
   - url-read.yaml
+  - api-gateway.yaml
