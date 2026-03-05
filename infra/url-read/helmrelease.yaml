@@ -20,7 +20,7 @@ spec:
       tag: latest
     config:
       LOG_LEVEL: DEBUG
-      DB_HOST: postgres-postgresql.postgres.svc
+      DB_HOST: pg-postgresql.postgres.svc
       REDIS_HOST: redis-master.redis.svc
       REDIS_DB: "0"
       DB_USER: url_gen_user
