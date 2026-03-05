@@ -22,6 +22,7 @@ resources:
   - redis.yaml
   - url-gen.yaml
   - url-read.yaml
+  - api-gateway.yaml
 
   # Ingress
   - traefik.yaml
