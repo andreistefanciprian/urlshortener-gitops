@@ -21,6 +21,7 @@ resources:
   - postgres.yaml
   - redis.yaml
   - url-gen.yaml
+  - url-read.yaml
 
   # Ingress
   - traefik.yaml

@@ -7,3 +7,4 @@ resources:
   - externalsecret-postgres.yaml
   - externalsecret-redis.yaml
   - externalsecret-url-gen.yaml
+  - externalsecret-url-read.yaml

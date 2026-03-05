@@ -1,0 +1,16 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: url-read
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  path: ./infra/url-read
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  dependsOn:
+    - name: postgres
+    - name: redis
+    - name: external-secrets-config

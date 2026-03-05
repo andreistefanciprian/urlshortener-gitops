@@ -1,0 +1,33 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: url-read
+  namespace: url-read
+spec:
+  interval: 5m0s
+  releaseName: url-read
+  chart:
+    spec:
+      chart: url-read
+      version: "0.1.10"
+      sourceRef:
+        kind: HelmRepository
+        name: url-read
+        namespace: flux-system
+  values:
+    image:
+      repository: ghcr.io/andreistefanciprian/url-read
+      tag: latest
+    config:
+      LOG_LEVEL: DEBUG
+      DB_HOST: postgres-postgresql.postgres.svc
+      REDIS_HOST: redis-master.redis.svc
+      REDIS_DB: "0"
+      DB_USER: url_gen_user
+    secrets:
+      db:
+        secretName: pg-creds
+        passwordKey: user-password
+      redis:
+        secretName: redis-creds
+        passwordKey: password
