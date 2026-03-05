@@ -15,6 +15,7 @@ This repository contains Kubernetes manifests managed by [FluxCD](https://fluxcd
 - **[Redis](https://github.com/bitnami/charts/tree/main/bitnami/redis)** - In-memory data store (standalone, credentials injected via External Secrets Operator from GCP Secret Manager)
 - **[PostgreSQL](https://github.com/bitnami/charts/tree/main/bitnami/postgresql)** - Relational database for the URL shortener (`urls` DB, `short_links` table, credentials injected via External Secrets Operator from GCP Secret Manager)
 - **[url-gen](https://github.com/andreistefanciprian/url-gen)** - gRPC backend service for URL generation (OCI chart from GHCR, credentials injected via External Secrets Operator from GCP Secret Manager)
+- **[url-read](https://github.com/andreistefanciprian/url-read)** - gRPC backend service for URL reading (OCI chart from GHCR, credentials injected via External Secrets Operator from GCP Secret Manager)
 
 ## Initial Setup
 
@@ -58,6 +59,8 @@ The following secrets are **not stored in Git**. They are created automatically 
 | `pg-creds` | `postgres` | `${CLUSTER_NAME}-db-admin-password`, `${CLUSTER_NAME}-db-user-password`, `${CLUSTER_NAME}-db-replication-password` |
 | `pg-creds` | `url-gen` | `${CLUSTER_NAME}-db-user-password` |
 | `redis-creds` | `url-gen` | `${CLUSTER_NAME}-redis-password` |
+| `pg-creds` | `url-read` | `${CLUSTER_NAME}-db-user-password` |
+| `redis-creds` | `url-read` | `${CLUSTER_NAME}-redis-password` |
 
 You must manually create and upload all secrets to GCP Secret Manager before deploying:
 
