@@ -7,10 +7,13 @@ spec:
   interval: 10m0s
   path: ./infra/url-gen
   prune: true
+  wait: true
+  timeout: 5m
   sourceRef:
     kind: GitRepository
     name: flux-system
   dependsOn:
+    - name: namespaces
     - name: postgres
     - name: redis
     - name: external-secrets-config

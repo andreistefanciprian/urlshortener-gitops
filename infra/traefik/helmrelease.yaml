@@ -6,6 +6,13 @@ metadata:
 spec:
   interval: 5m0s
   releaseName: traefik
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+      remediateLastFailure: true
   chart:
     spec:
       chart: traefik

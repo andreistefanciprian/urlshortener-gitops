@@ -7,6 +7,8 @@ spec:
   interval: 10m0s
   path: ./infra/api-gateway
   prune: true
+  wait: true
+  timeout: 5m
   postBuild:
     substituteFrom:
       - kind: ConfigMap
@@ -15,6 +17,6 @@ spec:
     kind: GitRepository
     name: flux-system
   dependsOn:
+    - name: namespaces
     - name: url-gen
     - name: url-read
-    - name: namespaces
