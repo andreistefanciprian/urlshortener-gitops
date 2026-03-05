@@ -1,6 +1,6 @@
 # GitOps Kubernetes Deployments with FluxCD
 
-This repository contains Kubernetes manifests managed by [FluxCD](https://fluxcd.io/) for automated GitOps deployments of the [URL Shortener](https://github.com/andreistefanciprian/urlshortener) application to a [private GKE cluster](https://github.com/andreistefanciprian/urlshortener/terraform).
+This repository contains Kubernetes manifests managed by [FluxCD](https://fluxcd.io/) for automated GitOps deployments of the [URL Shortener](https://github.com/andreistefanciprian/urlshortener) application to a [private GKE cluster](https://github.com/andreistefanciprian/urlshortener/tree/main/terraform).
 
 ## Deployed Components
 
@@ -108,11 +108,16 @@ helmfile -f clusters/home/flux-system/helmfile.yaml apply -l name=flux-instance
 
 #### 5. Access Flux Operator UI
 
+The Flux Operator UI is exposed via a private Cloudflare Tunnel ingress and is accessible at:
+
+**https://flux-operator.9tzy.xyz/**
+
+> **Note:** This is a private ingress. You must have [Cloudflare WARP](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/) installed and connected to access it. See the [Cloudflare infrastructure setup](https://github.com/andreistefanciprian/urlshortener/tree/main/terraform) for details.
+
+Alternatively, you can access it locally via port-forward:
 
 ```bash
-# Forward port to access the operator UI
 kubectl port-forward svc/flux-operator -n flux-system 9080:9080
-
 # Open in browser: http://localhost:9080
 ```
 
