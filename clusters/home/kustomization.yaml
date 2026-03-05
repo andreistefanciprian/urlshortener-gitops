@@ -23,6 +23,7 @@ resources:
   - url-gen.yaml
   - url-read.yaml
   - api-gateway.yaml
+  - frontend.yaml
 
   # Ingress
   - traefik.yaml
