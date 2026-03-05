@@ -20,10 +20,10 @@ This repository contains Kubernetes manifests managed by [FluxCD](https://fluxcd
 
 - **[PostgreSQL](https://github.com/bitnami/charts/tree/main/bitnami/postgresql)** - Relational database (`urls` DB, `short_links` table, credentials injected via External Secrets Operator from GCP Secret Manager)
 - **[Redis](https://github.com/bitnami/charts/tree/main/bitnami/redis)** - In-memory cache (standalone, credentials injected via External Secrets Operator from GCP Secret Manager)
-- **[url-gen](https://github.com/andreistefanciprian/url-gen)** - gRPC backend service for URL generation (credentials injected via External Secrets Operator from GCP Secret Manager)
-- **[url-read](https://github.com/andreistefanciprian/url-read)** - gRPC backend service for URL reading (credentials injected via External Secrets Operator from GCP Secret Manager)
-- **[api-gateway](https://github.com/andreistefanciprian/api-gateway)** - gRPC API gateway, aggregates url-gen and url-read backends
-- **[frontend](https://github.com/andreistefanciprian/frontend)** - Web frontend, communicates with api-gateway
+- **[url-gen](https://github.com/andreistefanciprian/urlshortener/tree/main/url-gen)** - gRPC backend service for URL generation (credentials injected via External Secrets Operator from GCP Secret Manager)
+- **[url-read](https://github.com/andreistefanciprian/urlshortener/tree/main/url-read)** - gRPC backend service for URL reading (credentials injected via External Secrets Operator from GCP Secret Manager)
+- **[api-gateway](https://github.com/andreistefanciprian/urlshortener/tree/main/api-gateway)** - gRPC API gateway, aggregates url-gen and url-read backends
+- **[frontend](https://github.com/andreistefanciprian/urlshortener/tree/main/frontend)** - Web frontend, communicates with api-gateway
 
 ## Initial Setup
 
