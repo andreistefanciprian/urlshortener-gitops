@@ -1,0 +1,33 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: url-gen
+  namespace: url-gen
+spec:
+  interval: 5m0s
+  releaseName: url-gen
+  chart:
+    spec:
+      chart: url-gen
+      version: "0.1.8"
+      sourceRef:
+        kind: HelmRepository
+        name: url-gen
+        namespace: flux-system
+  values:
+    image:
+      repository: ghcr.io/andreistefanciprian/url-gen
+      tag: latest
+    config:
+      LOG_LEVEL: DEBUG
+      DB_HOST: pg-postgresql.postgres.svc
+      REDIS_HOST: redis-master.redis.svc
+      REDIS_DB: "0"
+      DB_USER: url_gen_user
+    secrets:
+      db:
+        secretName: pg-creds
+        passwordKey: user-password
+      redis:
+        secretName: redis-creds
+        passwordKey: password

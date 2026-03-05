@@ -6,3 +6,4 @@ resources:
   - externalsecret-external-dns.yaml
   - externalsecret-postgres.yaml
   - externalsecret-redis.yaml
+  - externalsecret-url-gen.yaml

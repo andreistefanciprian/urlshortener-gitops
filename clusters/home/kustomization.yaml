@@ -20,6 +20,7 @@ resources:
   # Applications
   - postgres.yaml
   - redis.yaml
+  - url-gen.yaml
 
   # Ingress
   - traefik.yaml

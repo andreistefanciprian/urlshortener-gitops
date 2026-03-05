@@ -9,3 +9,4 @@ resources:
   - redis.yaml
   - secrets-store-csi-driver.yaml
   - traefik.yaml
+  - url-gen.yaml
