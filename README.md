@@ -4,6 +4,8 @@ This repository contains Kubernetes manifests managed by [FluxCD](https://fluxcd
 
 ## Deployed Components
 
+### Infrastructure
+
 - **[FluxCD](https://fluxcd.io/flux/)** - GitOps toolkit for Kubernetes
 - **[Kube-Prometheus-Stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack)** - Monitoring and alerting
 - **[Cert-Manager](https://cert-manager.io/docs/installation/helm/)** - Automatic TLS certificate management
@@ -11,11 +13,17 @@ This repository contains Kubernetes manifests managed by [FluxCD](https://fluxcd
 - **[Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/introduction)** - Secret management integration
 - **[External Secrets Operator](https://external-secrets.io/)** - Syncs secrets from GCP Secret Manager into Kubernetes
 - **[External DNS](https://kubernetes-sigs.github.io/external-dns/)** - Automatic DNS record management
+- **[Traefik](https://doc.traefik.io/traefik/)** - Ingress controller with GKE internal load balancer
 - **[Priority Classes](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/)** - Pod scheduling priority configuration
-- **[Redis](https://github.com/bitnami/charts/tree/main/bitnami/redis)** - In-memory data store (standalone, credentials injected via External Secrets Operator from GCP Secret Manager)
-- **[PostgreSQL](https://github.com/bitnami/charts/tree/main/bitnami/postgresql)** - Relational database for the URL shortener (`urls` DB, `short_links` table, credentials injected via External Secrets Operator from GCP Secret Manager)
-- **[url-gen](https://github.com/andreistefanciprian/url-gen)** - gRPC backend service for URL generation (OCI chart from GHCR, credentials injected via External Secrets Operator from GCP Secret Manager)
-- **[url-read](https://github.com/andreistefanciprian/url-read)** - gRPC backend service for URL reading (OCI chart from GHCR, credentials injected via External Secrets Operator from GCP Secret Manager)
+
+### URL Shortener Application
+
+- **[PostgreSQL](https://github.com/bitnami/charts/tree/main/bitnami/postgresql)** - Relational database (`urls` DB, `short_links` table, credentials injected via External Secrets Operator from GCP Secret Manager)
+- **[Redis](https://github.com/bitnami/charts/tree/main/bitnami/redis)** - In-memory cache (standalone, credentials injected via External Secrets Operator from GCP Secret Manager)
+- **[url-gen](https://github.com/andreistefanciprian/url-gen)** - gRPC backend service for URL generation (credentials injected via External Secrets Operator from GCP Secret Manager)
+- **[url-read](https://github.com/andreistefanciprian/url-read)** - gRPC backend service for URL reading (credentials injected via External Secrets Operator from GCP Secret Manager)
+- **[api-gateway](https://github.com/andreistefanciprian/api-gateway)** - gRPC API gateway, aggregates url-gen and url-read backends
+- **[frontend](https://github.com/andreistefanciprian/frontend)** - Web frontend, communicates with api-gateway
 
 ## Initial Setup
 
