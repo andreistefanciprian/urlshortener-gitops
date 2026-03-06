@@ -27,6 +27,7 @@ resources:
 
   # Ingress
   - traefik.yaml
+  - traefik-gateway.yaml
 
   # Security & Policy
   - priorityclasses.yaml

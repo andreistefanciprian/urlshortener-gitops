@@ -9,6 +9,7 @@ resources:
   - redis.yaml
   - secrets-store-csi-driver.yaml
   - traefik.yaml
+  - traefik-gateway.yaml
   - url-gen.yaml
   - url-read.yaml
   - api-gateway.yaml

@@ -1,0 +1,41 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: traefik-gateway
+  namespace: traefik-gateway
+spec:
+  interval: 5m0s
+  releaseName: traefik-gateway
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+      remediateLastFailure: true
+  chart:
+    spec:
+      chart: traefik
+      version: 34.3.0
+      sourceRef:
+        kind: HelmRepository
+        name: traefik
+        namespace: flux-system
+  values:
+    # Private GKE internal LB — same as the Ingress Traefik instance
+    service:
+      annotations:
+        networking.gke.io/load-balancer-type: Internal
+        networking.gke.io/internal-load-balancer-allow-global-access: "true"
+    # Gateway API provider only — do not process Ingress or IngressRoute resources
+    providers:
+      kubernetesIngress:
+        enabled: false
+      kubernetesCRD:
+        enabled: false
+      kubernetesGateway:
+        enabled: true
+    # Disable IngressClass so it doesn't conflict with the existing traefik instance
+    ingressClass:
+      enabled: false
+      isDefaultClass: false
