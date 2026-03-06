@@ -46,3 +46,27 @@ spec:
     # Disable the default Gateway — app-specific Gateways are managed separately
     gateway:
       enabled: false
+    # Entrypoints must bind on ports 80/443 to match Gateway listener ports.
+    # NET_BIND_SERVICE capability is required for non-root to bind to privileged ports.
+    ports:
+      web:
+        port: 80
+        exposedPort: 80
+        protocol: TCP
+      websecure:
+        port: 443
+        exposedPort: 443
+        protocol: TCP
+        # TLS is terminated at the Gateway level (cert-manager), not the entrypoint
+        tls:
+          enabled: false
+    securityContext:
+      capabilities:
+        add:
+          - NET_BIND_SERVICE
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 65532
+      runAsNonRoot: true
+      runAsUser: 65532
