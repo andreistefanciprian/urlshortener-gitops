@@ -39,7 +39,10 @@ spec:
     ingressClass:
       enabled: false
       isDefaultClass: false
-    # Disable chart-managed GatewayClass — managed via gatewayclass.yaml instead
-    # to avoid duplicate resource creation
+    # GatewayClass managed by the chart
     gatewayClass:
+      enabled: true
+      name: private
+    # Disable the default Gateway — app-specific Gateways are managed separately
+    gateway:
       enabled: false
