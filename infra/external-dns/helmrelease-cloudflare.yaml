@@ -35,3 +35,4 @@ spec:
     policy: upsert-only
     sources:
       - ingress
+      - gateway-httproute
