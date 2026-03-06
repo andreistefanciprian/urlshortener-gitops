@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: cert-manager
-      version: 1.19.3
+      version: 1.19.4
       sourceRef:
         kind: HelmRepository
         name: jetstack-charts
@@ -30,4 +30,5 @@ spec:
     # When this flag is enabled, secrets will be automatically removed when the certificate resource is deleted
     enableCertificateOwnerRef: true
     # Enable automatic certificate provisioning from Gateway API resources
-    featureGates: "ExperimentalGatewayAPISupport=true"
+    config:
+      enableGatewayAPI: true
