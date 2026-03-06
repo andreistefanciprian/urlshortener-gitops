@@ -39,6 +39,6 @@ spec:
         value: ap-southeast-2
     domainFilters:
       - ${AWS_DOMAIN}
-    policy: upsert-only
+    policy: sync
     sources:
       - ingress
