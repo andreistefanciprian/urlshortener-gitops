@@ -32,7 +32,7 @@ spec:
             key: api-token
     domainFilters:
       - ${CLOUDFLARE_DOMAIN}
-    policy: upsert-only
+    policy: sync
     sources:
       - ingress
       - gateway-httproute
