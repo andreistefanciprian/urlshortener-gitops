@@ -6,24 +6,28 @@ This repository contains Kubernetes manifests managed by [FluxCD](https://fluxcd
 
 ### Infrastructure
 
-- **[FluxCD](https://fluxcd.io/flux/)** - GitOps toolkit for Kubernetes
-- **[Kube-Prometheus-Stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack)** - Monitoring and alerting
-- **[Cert-Manager](https://cert-manager.io/docs/installation/helm/)** - Automatic TLS certificate management
-- **[Gateway API](https://gateway-api.sigs.k8s.io/)** - Kubernetes Gateway API CRDs
-- **[Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/introduction)** - Secret management integration
-- **[External Secrets Operator](https://external-secrets.io/)** - Syncs secrets from GCP Secret Manager into Kubernetes
-- **[External DNS](https://kubernetes-sigs.github.io/external-dns/)** - Automatic DNS record management
-- **[Traefik](https://doc.traefik.io/traefik/)** - Ingress controller with GKE internal load balancer
-- **[Priority Classes](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/)** - Pod scheduling priority configuration
+|  | Tool | Description |
+|------|------|-------------|
+| <img src="https://raw.githubusercontent.com/cncf/artwork/main/projects/flux/icon/color/flux-icon-color.png" height="30"> | [FluxCD](https://fluxcd.io/flux/) | GitOps toolkit for Kubernetes |
+| <img src="https://raw.githubusercontent.com/cncf/artwork/main/projects/prometheus/icon/color/prometheus-icon-color.png" height="30"> | [Kube-Prometheus-Stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) | Monitoring and alerting |
+| <img src="https://raw.githubusercontent.com/cert-manager/cert-manager/master/logo/logo.png" height="30"> | [Cert-Manager](https://cert-manager.io/docs/installation/helm/) | Automatic TLS certificate management |
+| <img src="https://raw.githubusercontent.com/cncf/artwork/main/projects/kubernetes/icon/color/kubernetes-icon-color.png" height="30"> | [Gateway API](https://gateway-api.sigs.k8s.io/) | Kubernetes Gateway API CRDs |
+| <img src="https://raw.githubusercontent.com/cncf/artwork/main/projects/kubernetes/icon/color/kubernetes-icon-color.png" height="30"> | [Secrets Store CSI Driver](https://secrets-store-csi-driver.sigs.k8s.io/introduction) | Secret management integration |
+| <img src="https://raw.githubusercontent.com/external-secrets/external-secrets/main/assets/eso-logo-medium.png" height="30"> | [External Secrets Operator](https://external-secrets.io/) | Syncs secrets from GCP Secret Manager into Kubernetes |
+| <img src="https://raw.githubusercontent.com/cncf/artwork/main/projects/kubernetes/icon/color/kubernetes-icon-color.png" height="30"> | [External DNS](https://kubernetes-sigs.github.io/external-dns/) | Automatic DNS record management (Cloudflare + Route53) |
+| <img src="https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png" height="30"> | [Traefik](https://doc.traefik.io/traefik/) | Ingress and Gateway API controller with GKE internal load balancer |
+| <img src="https://raw.githubusercontent.com/cncf/artwork/main/projects/kubernetes/icon/color/kubernetes-icon-color.png" height="30"> | [Priority Classes](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/) | Pod scheduling priority configuration |
 
 ### URL Shortener Application
 
-- **[PostgreSQL](https://github.com/bitnami/charts/tree/main/bitnami/postgresql)** - Relational database (`urls` DB, `short_links` table, credentials injected via External Secrets Operator from GCP Secret Manager)
-- **[Redis](https://github.com/bitnami/charts/tree/main/bitnami/redis)** - In-memory cache (standalone, credentials injected via External Secrets Operator from GCP Secret Manager)
-- **[url-gen](https://github.com/andreistefanciprian/urlshortener/tree/main/url-gen)** - gRPC backend service for URL generation (credentials injected via External Secrets Operator from GCP Secret Manager)
-- **[url-read](https://github.com/andreistefanciprian/urlshortener/tree/main/url-read)** - gRPC backend service for URL reading (credentials injected via External Secrets Operator from GCP Secret Manager)
-- **[api-gateway](https://github.com/andreistefanciprian/urlshortener/tree/main/api-gateway)** - gRPC API gateway, aggregates url-gen and url-read backends
-- **[frontend](https://github.com/andreistefanciprian/urlshortener/tree/main/frontend)** - Web frontend, communicates with api-gateway
+|  | Tool | Description |
+|------|------|-------------|
+| <img src="https://cdn.simpleicons.org/postgresql" height="30"> | [PostgreSQL](https://github.com/bitnami/charts/tree/main/bitnami/postgresql) | Relational database (`urls` DB, `short_links` table, credentials from GCP Secret Manager) |
+| <img src="https://cdn.simpleicons.org/redis" height="30"> | [Redis](https://github.com/bitnami/charts/tree/main/bitnami/redis) | In-memory cache (standalone, credentials from GCP Secret Manager) |
+| <img src="https://raw.githubusercontent.com/andreistefanciprian/urlshortener/main/urlshortener_logo.png" height="30"> | [url-gen](https://github.com/andreistefanciprian/urlshortener/tree/main/url-gen) | gRPC backend service for URL generation |
+| <img src="https://raw.githubusercontent.com/andreistefanciprian/urlshortener/main/urlshortener_logo.png" height="30"> | [url-read](https://github.com/andreistefanciprian/urlshortener/tree/main/url-read) | gRPC backend service for URL reading |
+| <img src="https://raw.githubusercontent.com/andreistefanciprian/urlshortener/main/urlshortener_logo.png" height="30"> | [api-gateway](https://github.com/andreistefanciprian/urlshortener/tree/main/api-gateway) | gRPC gateway aggregating url-gen and url-read backends |
+| <img src="https://raw.githubusercontent.com/andreistefanciprian/urlshortener/main/urlshortener_logo.png" height="30"> | [frontend](https://github.com/andreistefanciprian/urlshortener/tree/main/frontend) | Web frontend communicating with api-gateway |
 
 ## Initial Setup
 
