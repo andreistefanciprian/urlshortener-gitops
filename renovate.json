@@ -1,0 +1,54 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "enabledManagers": ["regex"],
+
+  "regexManagers": [
+    {
+      "description": "Bump Helm chart version in Flux HelmRelease for app services",
+      "fileMatch": ["^infra/(api-gateway|frontend|url-gen|url-read)/helmrelease\\.ya?ml$"],
+      "matchStrings": [
+        "chart:\\s+(?<chart>[a-z-]+)\\n\\s+version:\\s+\"?(?<currentValue>[^\\s\"#]+)\"?"
+      ],
+      "depNameTemplate": "ghcr.io/andreistefanciprian/urlshortener/{{{chart}}}",
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "semver"
+    },
+    {
+      "description": "Bump container image tag in Flux HelmRelease values for app services",
+      "fileMatch": ["^infra/(api-gateway|frontend|url-gen|url-read)/helmrelease\\.ya?ml$"],
+      "matchStrings": [
+        "repository:\\s+(?<depName>ghcr\\.io/andreistefanciprian/[a-z-]+)\\n\\s+tag:\\s+(?<currentValue>\\d+\\.\\d+\\.\\d+)"
+      ],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "semver"
+    }
+  ],
+
+  "packageRules": [
+    {
+      "matchDatasources": ["docker"],
+      "automerge": true,
+      "prCreation": "immediate",
+      "stabilityDays": 0
+    },
+    {
+      "description": "Commit messages for GHCR OCI Helm chart version bumps",
+      "matchManagers": ["regex"],
+      "matchPackagePatterns": ["^ghcr\\.io/andreistefanciprian/urlshortener/"],
+      "commitMessagePrefix": "helm",
+      "commitMessageAction": "bump",
+      "commitMessageTopic": "{{depName}}",
+      "commitMessageExtra": "to {{newVersion}}"
+    },
+    {
+      "description": "Commit messages for container image tag updates",
+      "matchManagers": ["regex"],
+      "matchPackagePatterns": ["^ghcr\\.io/andreistefanciprian/(api-gateway|frontend|url-gen|url-read)$"],
+      "commitMessagePrefix": "image",
+      "commitMessageAction": "bump",
+      "commitMessageTopic": "{{depName}}",
+      "commitMessageExtra": "to {{newVersion}}"
+    }
+  ]
+}

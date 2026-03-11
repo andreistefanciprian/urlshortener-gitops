@@ -24,7 +24,7 @@ spec:
   values:
     image:
       repository: ghcr.io/andreistefanciprian/url-gen
-      tag: latest
+      tag: 1.1.2
     config:
       LOG_LEVEL: DEBUG
       DB_HOST: pg-postgresql.postgres.svc

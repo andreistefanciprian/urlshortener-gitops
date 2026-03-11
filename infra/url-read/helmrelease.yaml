@@ -24,7 +24,7 @@ spec:
   values:
     image:
       repository: ghcr.io/andreistefanciprian/url-read
-      tag: latest
+      tag: 1.2.1
     config:
       LOG_LEVEL: DEBUG
       DB_HOST: pg-postgresql.postgres.svc
