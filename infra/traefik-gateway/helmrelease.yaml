@@ -43,9 +43,50 @@ spec:
     gatewayClass:
       enabled: true
       name: private
-    # Disable the default Gateway — app-specific Gateways are managed separately
     gateway:
-      enabled: false
+      enabled: true
+      name: urlshortener-gateway
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      listeners:
+        https-api-gateway:
+          hostname: "9tzy.xyz"
+          port: 443
+          protocol: HTTPS
+          tls:
+            mode: Terminate
+            certificateRefs:
+              - kind: Secret
+                name: api-gateway-cert
+          allowedRoutes:
+            namespaces:
+              from: All
+        http-api-gateway:
+          hostname: "9tzy.xyz"
+          port: 80
+          protocol: HTTP
+          allowedRoutes:
+            namespaces:
+              from: All
+        https-frontend:
+          hostname: "app.9tzy.xyz"
+          port: 443
+          protocol: HTTPS
+          tls:
+            mode: Terminate
+            certificateRefs:
+              - kind: Secret
+                name: frontend-cert
+          allowedRoutes:
+            namespaces:
+              from: All
+        http-frontend:
+          hostname: "app.9tzy.xyz"
+          port: 80
+          protocol: HTTP
+          allowedRoutes:
+            namespaces:
+              from: All
     # Entrypoints must bind on ports 80/443 to match Gateway listener ports.
     # NET_BIND_SERVICE capability is required for non-root to bind to privileged ports.
     ports:
