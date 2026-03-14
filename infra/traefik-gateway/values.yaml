@@ -1,0 +1,80 @@
+# Private GKE internal LB — same as the Ingress Traefik instance
+service:
+  annotations:
+    networking.gke.io/load-balancer-type: Internal
+    networking.gke.io/internal-load-balancer-allow-global-access: "true"
+# Gateway API provider only — do not process Ingress or IngressRoute resources
+providers:
+  kubernetesIngress:
+    enabled: false
+  kubernetesCRD:
+    enabled: false
+  kubernetesGateway:
+    enabled: true
+# Disable IngressClass so it doesn't conflict with the existing traefik instance
+ingressClass:
+  enabled: false
+  isDefaultClass: false
+# GatewayClass managed by the chart
+gatewayClass:
+  enabled: true
+  name: private
+gateway:
+  enabled: true
+  name: urlshortener-gateway
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  listeners:
+    web:
+      hostname: "9tzy.xyz"
+      port: 80
+      protocol: HTTP
+      namespacePolicy:
+        from: All
+    websecure:
+      hostname: "9tzy.xyz"
+      port: 443
+      protocol: HTTPS
+      certificateRefs:
+        - kind: Secret
+          name: api-gateway-cert
+      mode: Terminate
+      namespacePolicy:
+        from: All
+    https-frontend:
+      hostname: "app.9tzy.xyz"
+      port: 443
+      protocol: HTTPS
+      certificateRefs:
+        - kind: Secret
+          name: frontend-cert
+      mode: Terminate
+      namespacePolicy:
+        from: All
+    http-frontend:
+      hostname: "app.9tzy.xyz"
+      port: 80
+      protocol: HTTP
+      namespacePolicy:
+        from: All
+# Entrypoints must bind on ports 80/443 to match Gateway listener ports.
+# NET_BIND_SERVICE capability is required for non-root to bind to privileged ports.
+ports:
+  web:
+    port: 80
+    exposedPort: 80
+    protocol: TCP
+  websecure:
+    port: 443
+    exposedPort: 443
+    protocol: TCP
+securityContext:
+  capabilities:
+    add:
+      - NET_BIND_SERVICE
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  runAsGroup: 65532
+  runAsNonRoot: true
+  runAsUser: 65532
