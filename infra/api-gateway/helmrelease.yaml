@@ -46,3 +46,12 @@ spec:
                 type: PathPrefix
                 value: /
               method: GET
+            # DEBUG ONLY - PUT /create and DELETE / should not be exposed to public
+            - path:
+                type: Exact
+                value: /create
+              method: PUT
+            - path:
+                type: PathPrefix
+                value: /
+              method: DELETE
