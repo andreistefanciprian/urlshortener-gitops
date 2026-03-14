@@ -28,3 +28,16 @@ spec:
     config:
       LOG_LEVEL: DEBUG
       BACKEND_HOST: api-gateway.api-gateway.svc
+    httpRoute:
+      enabled: true
+      parentRefs:
+        - name: urlshortener-gateway
+          namespace: traefik-gateway
+          sectionName: https-frontend
+      hostnames:
+        - app.${CLOUDFLARE_DOMAIN}
+      rules:
+        - matches:
+            - path:
+                type: PathPrefix
+                value: /
