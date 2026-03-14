@@ -32,8 +32,7 @@ data:
           hostname: "9tzy.xyz"
           port: 80
           protocol: HTTP
-          namespacePolicy:
-            from: All
+          namespacePolicy: All
         websecure:
           hostname: "9tzy.xyz"
           port: 443
@@ -42,8 +41,7 @@ data:
             - kind: Secret
               name: api-gateway-cert
           mode: Terminate
-          namespacePolicy:
-            from: All
+          namespacePolicy: All
         https-frontend:
           hostname: "app.9tzy.xyz"
           port: 443
@@ -52,14 +50,12 @@ data:
             - kind: Secret
               name: frontend-cert
           mode: Terminate
-          namespacePolicy:
-            from: All
+          namespacePolicy: All
         http-frontend:
           hostname: "app.9tzy.xyz"
           port: 80
           protocol: HTTP
-          namespacePolicy:
-            from: All
+          namespacePolicy: All
     ports:
       web:
         port: 80
