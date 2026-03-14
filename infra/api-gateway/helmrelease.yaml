@@ -32,8 +32,6 @@ spec:
       URL_READ_HOST: url-read.url-read.svc
     httpRoute:
       enabled: true
-      annotations:
-        external-dns.alpha.kubernetes.io/exclude: "true"
       parentRefs:
         - name: urlshortener-gateway
           namespace: traefik-gateway
