@@ -34,7 +34,10 @@ data:
           port: 80
           protocol: HTTP
           namespacePolicy:
-            from: All
+            from: Selector
+            selector:
+              matchLabels:
+                kubernetes.io/metadata.name: api-gateway
         https-api-gateway:
           hostname: "9tzy.xyz"
           port: 443
@@ -44,7 +47,10 @@ data:
               name: api-gateway-cert
           mode: Terminate
           namespacePolicy:
-            from: All
+            from: Selector
+            selector:
+              matchLabels:
+                kubernetes.io/metadata.name: api-gateway
         https-frontend:
           hostname: "app.9tzy.xyz"
           port: 443
@@ -54,13 +60,19 @@ data:
               name: frontend-cert
           mode: Terminate
           namespacePolicy:
-            from: All
+            from: Selector
+            selector:
+              matchLabels:
+                kubernetes.io/metadata.name: frontend
         http-frontend:
           hostname: "app.9tzy.xyz"
           port: 80
           protocol: HTTP
           namespacePolicy:
-            from: All
+            from: Selector
+            selector:
+              matchLabels:
+                kubernetes.io/metadata.name: frontend
     ports:
       web:
         port: 80
