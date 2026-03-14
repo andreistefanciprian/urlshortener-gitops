@@ -4,7 +4,7 @@ metadata:
   name: cluster-vars
   namespace: flux-system
 data:
-  GCP_PROJECT: dependable-yen-480702-b5
+  GCP_PROJECT: project-1773fbef-605a-440c-97d
   AWS_DOMAIN: netl1.com
   CLOUDFLARE_DOMAIN: 9tzy.xyz
   ACME_EMAIL: andreistefanciprian@gmail.com

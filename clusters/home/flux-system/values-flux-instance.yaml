@@ -31,4 +31,4 @@ instance:
         patch: |
           - op: add
             path: /metadata/annotations/iam.gke.io~1gcp-service-account
-            value: flux-gar-authenticator@dependable-yen-480702-b5.iam.gserviceaccount.com 
+            value: flux-gar-authenticator@project-1773fbef-605a-440c-97d.iam.gserviceaccount.com 
