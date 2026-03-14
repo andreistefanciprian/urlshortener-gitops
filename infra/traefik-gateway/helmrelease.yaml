@@ -49,6 +49,8 @@ spec:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
       listeners:
+        web: null
+        websecure: null
         https-api-gateway:
           hostname: "9tzy.xyz"
           port: 443
