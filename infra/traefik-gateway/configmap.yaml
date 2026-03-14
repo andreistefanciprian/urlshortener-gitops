@@ -1,0 +1,81 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: traefik-gateway-values
+  namespace: traefik-gateway
+data:
+  values.yaml: |
+    service:
+      annotations:
+        networking.gke.io/load-balancer-type: Internal
+        networking.gke.io/internal-load-balancer-allow-global-access: "true"
+    providers:
+      kubernetesIngress:
+        enabled: false
+      kubernetesCRD:
+        enabled: false
+      kubernetesGateway:
+        enabled: true
+    ingressClass:
+      enabled: false
+      isDefaultClass: false
+    gatewayClass:
+      enabled: true
+      name: private
+    gateway:
+      enabled: true
+      name: urlshortener-gateway
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      listeners:
+        web:
+          hostname: "9tzy.xyz"
+          port: 80
+          protocol: HTTP
+          namespacePolicy:
+            from: All
+        websecure:
+          hostname: "9tzy.xyz"
+          port: 443
+          protocol: HTTPS
+          certificateRefs:
+            - kind: Secret
+              name: api-gateway-cert
+          mode: Terminate
+          namespacePolicy:
+            from: All
+        https-frontend:
+          hostname: "app.9tzy.xyz"
+          port: 443
+          protocol: HTTPS
+          certificateRefs:
+            - kind: Secret
+              name: frontend-cert
+          mode: Terminate
+          namespacePolicy:
+            from: All
+        http-frontend:
+          hostname: "app.9tzy.xyz"
+          port: 80
+          protocol: HTTP
+          namespacePolicy:
+            from: All
+    ports:
+      web:
+        port: 80
+        exposedPort: 80
+        protocol: TCP
+      websecure:
+        port: 443
+        exposedPort: 443
+        protocol: TCP
+    securityContext:
+      capabilities:
+        add:
+          - NET_BIND_SERVICE
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+      runAsGroup: 65532
+      runAsNonRoot: true
+      runAsUser: 65532
