@@ -24,7 +24,7 @@ spec:
   values:
     image:
       repository: ghcr.io/andreistefanciprian/api-gateway
-      tag: 1.0.8
+      tag: 1.0.9@sha256:52e3ad73f5616b357d3000d640cc1650b0f2be79e07b560a81b36a2e2d0f7bd7
     config:
       LOG_LEVEL: DEBUG
       DOMAIN_NAME: ${CLOUDFLARE_DOMAIN}
