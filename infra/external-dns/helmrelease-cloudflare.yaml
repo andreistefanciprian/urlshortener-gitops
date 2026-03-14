@@ -16,7 +16,7 @@ spec:
   chart:
     spec:
       chart: external-dns
-      version: 1.15.2
+      version: 1.20.0
       sourceRef:
         kind: HelmRepository
         name: external-dns-charts
@@ -32,7 +32,7 @@ spec:
             key: api-token
     domainFilters:
       - ${CLOUDFLARE_DOMAIN}
-    policy: sync
+    policy: upsert-only
     sources:
       - ingress
       - gateway-httproute
