@@ -53,11 +53,9 @@ spec:
           hostname: "9tzy.xyz"
           port: 443
           protocol: HTTPS
-          tls:
-            mode: Terminate
-            certificateRefs:
-              - kind: Secret
-                name: api-gateway-cert
+          certificateRefs:
+            - kind: Secret
+              name: api-gateway-cert
           allowedRoutes:
             namespaces:
               from: All
@@ -72,11 +70,9 @@ spec:
           hostname: "app.9tzy.xyz"
           port: 443
           protocol: HTTPS
-          tls:
-            mode: Terminate
-            certificateRefs:
-              - kind: Secret
-                name: frontend-cert
+          certificateRefs:
+            - kind: Secret
+              name: frontend-cert
           allowedRoutes:
             namespaces:
               from: All
