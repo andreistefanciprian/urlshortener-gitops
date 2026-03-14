@@ -28,13 +28,13 @@ data:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
       listeners:
-        web:
+        http-api-gateway:
           hostname: "9tzy.xyz"
           port: 80
           protocol: HTTP
           namespacePolicy:
             from: All
-        websecure:
+        https-api-gateway:
           hostname: "9tzy.xyz"
           port: 443
           protocol: HTTPS
