@@ -28,6 +28,7 @@ data:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
       listeners:
+        web: null
         http-api-gateway:
           hostname: "9tzy.xyz"
           port: 80
