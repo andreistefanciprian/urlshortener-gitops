@@ -24,7 +24,7 @@ spec:
   values:
     image:
       repository: ghcr.io/andreistefanciprian/frontend
-      tag: 1.1.0
+      tag: 1.1.2@sha256:9379274886c49e85bd53cb7ad91b03ae1badec73660a252b5576a2274af4984c
     config:
       LOG_LEVEL: DEBUG
       BACKEND_HOST: api-gateway.api-gateway.svc
