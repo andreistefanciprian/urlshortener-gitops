@@ -9,7 +9,7 @@ data:
       annotations:
         networking.gke.io/load-balancer-type: Internal
         networking.gke.io/internal-load-balancer-allow-global-access: "true"
-        networking.gke.io/load-balancer-static-ip: "${GATEWAY_LB_IP}"
+        networking.gke.io/load-balancer-static-ip: "${GATEWAY_LB_NAME}"
     providers:
       kubernetesIngress:
         enabled: false

@@ -26,3 +26,4 @@ spec:
       annotations:
         networking.gke.io/load-balancer-type: Internal
         networking.gke.io/internal-load-balancer-allow-global-access: "true"
+        networking.gke.io/load-balancer-static-ip: "${INGRESS_LB_NAME}"
