@@ -3,4 +3,5 @@ kind: Kustomization
 resources:
   - helmrepository.yaml
   # - helmrelease-aws.yaml
-  - helmrelease-cloudflare.yaml
+  # - helmrelease-cloudflare.yaml
+  - helmrelease-clouddns.yaml

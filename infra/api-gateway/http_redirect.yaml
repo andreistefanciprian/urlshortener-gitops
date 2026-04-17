@@ -7,9 +7,9 @@ spec:
   parentRefs:
     - name: urlshortener-gateway
       namespace: traefik-gateway
-      sectionName: http-api-gateway
+      sectionName: http-api
   hostnames:
-    - ${CLOUDFLARE_DOMAIN}
+    - api.${INTERNAL_DOMAIN}
   rules:
     - matches:
         - path:
