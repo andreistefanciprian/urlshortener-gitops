@@ -12,5 +12,6 @@ data:
   GCP_REGION: australia-southeast1
   CLUSTER_NAME: home
   GCP_CERT_POOL_ID: home-ca-pool
-  GATEWAY_LB_IP: "10.100.0.31"  # set to terraform networking output: gateway_lb_ip
+  GATEWAY_LB_NAME: "home-gateway-lb"  # set to terraform networking output: gateway_lb_name
+  INGRESS_LB_NAME: "home-ingress-lb"  # set to terraform networking output: ingress_lb_name
 
