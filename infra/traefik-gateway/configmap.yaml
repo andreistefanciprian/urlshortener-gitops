@@ -76,6 +76,28 @@ data:
             selector:
               matchLabels:
                 kubernetes.io/metadata.name: frontend
+        https-echo:
+          hostname: "echo.${INTERNAL_DOMAIN}"
+          port: 443
+          protocol: HTTPS
+          certificateRefs:
+            - kind: Secret
+              name: echo-cert
+          mode: Terminate
+          namespacePolicy:
+            from: Selector
+            selector:
+              matchLabels:
+                kubernetes.io/metadata.name: echo
+        http-echo:
+          hostname: "echo.${INTERNAL_DOMAIN}"
+          port: 80
+          protocol: HTTP
+          namespacePolicy:
+            from: Selector
+            selector:
+              matchLabels:
+                kubernetes.io/metadata.name: echo
     ports:
       web:
         port: 80
