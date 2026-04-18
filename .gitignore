@@ -2,4 +2,4 @@
 terraform
 test
 **/.debug.md
-.debug
+**/.debug
