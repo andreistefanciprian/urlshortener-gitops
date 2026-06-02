@@ -9,6 +9,7 @@ data:
       annotations:
         networking.gke.io/load-balancer-type: Internal
         networking.gke.io/internal-load-balancer-allow-global-access: "true"
+        networking.gke.io/load-balancer-static-ip: "${GATEWAY_LB_NAME}"
     providers:
       kubernetesIngress:
         enabled: false
@@ -26,20 +27,13 @@ data:
       enabled: true
       name: urlshortener-gateway
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-prod
+        cert-manager.io/cluster-issuer: googlecasclusterissuer
+        cert-manager.io/issuer-kind: GoogleCASClusterIssuer
+        cert-manager.io/issuer-group: cas-issuer.jetstack.io
       listeners:
         web: null
-        http-api-gateway:
-          hostname: "9tzy.xyz"
-          port: 80
-          protocol: HTTP
-          namespacePolicy:
-            from: Selector
-            selector:
-              matchLabels:
-                kubernetes.io/metadata.name: api-gateway
-        https-api-gateway:
-          hostname: "9tzy.xyz"
+        https-api:
+          hostname: "api.${INTERNAL_DOMAIN}"
           port: 443
           protocol: HTTPS
           certificateRefs:
@@ -51,8 +45,17 @@ data:
             selector:
               matchLabels:
                 kubernetes.io/metadata.name: api-gateway
+        http-api:
+          hostname: "api.${INTERNAL_DOMAIN}"
+          port: 80
+          protocol: HTTP
+          namespacePolicy:
+            from: Selector
+            selector:
+              matchLabels:
+                kubernetes.io/metadata.name: api-gateway
         https-frontend:
-          hostname: "app.9tzy.xyz"
+          hostname: "frontend.${INTERNAL_DOMAIN}"
           port: 443
           protocol: HTTPS
           certificateRefs:
@@ -65,7 +68,7 @@ data:
               matchLabels:
                 kubernetes.io/metadata.name: frontend
         http-frontend:
-          hostname: "app.9tzy.xyz"
+          hostname: "frontend.${INTERNAL_DOMAIN}"
           port: 80
           protocol: HTTP
           namespacePolicy:
@@ -73,6 +76,28 @@ data:
             selector:
               matchLabels:
                 kubernetes.io/metadata.name: frontend
+        https-echo:
+          hostname: "echo.${INTERNAL_DOMAIN}"
+          port: 443
+          protocol: HTTPS
+          certificateRefs:
+            - kind: Secret
+              name: echo-cert
+          mode: Terminate
+          namespacePolicy:
+            from: Selector
+            selector:
+              matchLabels:
+                kubernetes.io/metadata.name: echo
+        http-echo:
+          hostname: "echo.${INTERNAL_DOMAIN}"
+          port: 80
+          protocol: HTTP
+          namespacePolicy:
+            from: Selector
+            selector:
+              matchLabels:
+                kubernetes.io/metadata.name: echo
     ports:
       web:
         port: 80

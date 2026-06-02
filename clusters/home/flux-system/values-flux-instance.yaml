@@ -12,7 +12,7 @@ instance:
   sync:
     kind: GitRepository
     url: "https://github.com/andreistefanciprian/urlshortener-gitops"
-    ref: "refs/heads/main"
+    ref: "refs/heads/use-internal-cloud-DNS"
     provider: github
     pullSecret: flux-system
     path: "clusters/home"

@@ -10,13 +10,15 @@ web:
     enabled: true # @schema default: false
     className: "traefik"
     annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-prod
+      cert-manager.io/cluster-issuer: googlecasclusterissuer
+      cert-manager.io/issuer-kind: GoogleCASClusterIssuer
+      cert-manager.io/issuer-group: cas-issuer.jetstack.io
     hosts: # @schema item: object ; uniqueItems: true
-      - host: flux-operator.9tzy.xyz
+      - host: flux-operator.home.internal
         paths:
           - path: /
             pathType: ImplementationSpecific
     tls: # @schema item: object ; uniqueItems: true
       - secretName: flux-operator-tls
         hosts:
-          - flux-operator.9tzy.xyz
+          - flux-operator.home.internal

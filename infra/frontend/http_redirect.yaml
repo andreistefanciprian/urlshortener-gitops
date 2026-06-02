@@ -9,7 +9,7 @@ spec:
       namespace: traefik-gateway
       sectionName: http-frontend
   hostnames:
-    - app.${CLOUDFLARE_DOMAIN}
+    - frontend.${INTERNAL_DOMAIN}
   rules:
     - matches:
         - path:

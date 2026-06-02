@@ -35,20 +35,21 @@ spec:
       parentRefs:
         - name: urlshortener-gateway
           namespace: traefik-gateway
-          sectionName: https-api-gateway
+          sectionName: https-api
       hostnames:
-        - ${CLOUDFLARE_DOMAIN}
+        - api.${INTERNAL_DOMAIN}
       rules:
         - matches:
             - path:
                 type: PathPrefix
                 value: /
               method: GET
-            # DEBUG ONLY - POST /create and DELETE / should not be exposed to public
+        - matches:
             - path:
                 type: Exact
                 value: /create
               method: POST
+        - matches:
             - path:
                 type: PathPrefix
                 value: /
